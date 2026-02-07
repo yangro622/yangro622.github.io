@@ -46,6 +46,63 @@ order: 1                          # lower = listed first
 ---
 ```
 
+## Adding Pages
+
+Astro uses file-based routing. To add a new page:
+
+1. Create `src/pages/pagename.astro` — becomes `/pagename`
+2. Use the shared layout: `import Base from '../layouts/Base.astro'`
+3. Add a nav link in `src/components/Header.astro` if it should appear in navigation
+
+Example new page:
+```astro
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Page Title">
+  <h1>Page Title</h1>
+  <p>Content here.</p>
+</Base>
+```
+
+Nested routes: `src/pages/foo/bar.astro` → `/foo/bar`
+
+## Images & Static Assets
+
+- Place images in `public/images/` — they're served at `/images/filename.ext`
+- Reference in Markdown: `![alt text](/images/filename.jpg)`
+- Reference in Astro components: `<img src="/images/filename.jpg" alt="..." />`
+- Supported formats: prefer `.webp` or `.jpg` for photos, `.svg` for icons/logos
+- Keep images reasonably sized (max ~500KB per image, resize large photos before adding)
+
+## Styles
+
+All design tokens and base styles live in `src/styles/global.css`.
+
+### CSS Variables (design tokens)
+
+```css
+--c-bg            /* page background */
+--c-surface       /* card/code block background */
+--c-text          /* primary text */
+--c-text-muted    /* secondary/subtle text */
+--c-border        /* borders and dividers */
+--c-accent        /* links, highlights (blue) */
+--c-accent-hover  /* link hover state */
+--font-body       /* body text font (Inter) */
+--font-mono       /* code/accent font (monospace) */
+--space-xs/sm/md/lg/xl/2xl  /* spacing scale */
+--max-width       /* content max width (640px) */
+```
+
+### How to make style changes
+
+- **Global changes** (colors, fonts, spacing): edit CSS variables in `global.css` `:root`
+- **Dark mode**: edit the `@media (prefers-color-scheme: dark)` block in `global.css`
+- **Page-specific styles**: use `<style>` blocks within `.astro` files (scoped by default)
+- **Component styles**: each component has its own `<style>` block — edit in place
+- Always maintain both light and dark mode when changing colors
+
 ## Architecture
 
 ```
