@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+
+<Base title="Blog">
+  <h1>Blog</h1>
+  <p class="subtitle">Thoughts on software, technology, and whatever else comes to mind.</p>
+
+  {posts.length === 0 ? (
+    <p class="empty">Nothing here yet. Check back soon.</p>
+  ) : (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <a href={`/blog/${post.id}`}>
+            <div>
+              <span class="post-title">{post.data.title}</span>
+              <p class="post-desc">{post.data.description}</p>
+            </div>
+            <span class="post-date">{formatDate(post.data.date)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>
+
+<style>
+  h1 {
+    margin-bottom: var(--space-xs);
+  }
+
+  .subtitle {
+    color: var(--c-text-muted);
+    margin-bottom: var(--space-xl);
+  }
+
+  .empty {
+    color: var(--c-text-muted);
+    font-style: italic;
+  }
+
+  .post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-list li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--space-md) 0;
+    color: var(--c-text);
+    border-bottom: 1px solid var(--c-border);
+    transition: padding-left var(--transition);
+  }
+
+  .post-list li:first-child a {
+    border-top: 1px solid var(--c-border);
+  }
+
+  .post-list li a:hover {
+    padding-left: var(--space-sm);
+    color: var(--c-text);
+  }
+
+  .post-desc {
+    font-size: 0.875rem;
+    color: var(--c-text-muted);
+    margin-top: var(--space-xs);
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--c-text-muted);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+    margin-left: var(--space-lg);
+    padding-top: 0.15em;
+  }
+</style>

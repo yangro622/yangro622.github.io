@@ -1,0 +1,88 @@
+---
+const navItems = [
+  { label: 'Blog', href: '/blog' },
+  { label: 'Projects', href: '/projects' },
+];
+const currentPath = Astro.url.pathname;
+---
+
+<header>
+  <nav>
+    <a href="/" class="logo">ry<span class="logo-dot">.</span></a>
+    <div class="nav-links">
+      {navItems.map(({ label, href }) => (
+        <a
+          href={href}
+          class:list={['nav-link', { active: currentPath.startsWith(href) }]}
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    width: 100%;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--c-text);
+    letter-spacing: -0.03em;
+  }
+
+  .logo:hover {
+    color: var(--c-text);
+  }
+
+  .logo-dot {
+    color: var(--c-accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: var(--c-text-muted);
+    letter-spacing: 0.01em;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--c-accent);
+    transition: width var(--transition);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--c-text);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+</style>

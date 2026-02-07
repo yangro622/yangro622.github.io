@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+---
+
+<Base>
+  <section class="intro">
+    <h1>Robert Yang <span class="zh">杨天一</span></h1>
+    <p class="tagline">Software engineer. Building things on the internet.</p>
+  </section>
+
+  <section class="about">
+    <p>
+      Welcome — this is my corner of the web. I write about software, share projects I'm working on,
+      and occasionally think out loud.
+    </p>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="recent">
+      <h2>Recent writing</h2>
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}`}>
+              <span class="post-title">{post.data.title}</span>
+              <span class="post-date">{formatDate(post.data.date)}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a href="/blog" class="view-all">All posts &rarr;</a>
+    </section>
+  )}
+</Base>
+
+<style>
+  .intro {
+    margin-bottom: var(--space-xl);
+  }
+
+  .intro h1 {
+    font-size: 2.25rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .zh {
+    font-weight: 400;
+    color: var(--c-text-muted);
+    font-size: 1.5rem;
+    margin-left: var(--space-xs);
+  }
+
+  .tagline {
+    color: var(--c-text-muted);
+    font-size: 1.1rem;
+  }
+
+  .about {
+    margin-bottom: var(--space-xl);
+  }
+
+  .about p {
+    color: var(--c-text-muted);
+  }
+
+  .recent h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .post-list li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-sm) 0;
+    color: var(--c-text);
+    border-bottom: 1px solid var(--c-border);
+    transition: padding-left var(--transition);
+  }
+
+  .post-list li a:hover {
+    padding-left: var(--space-sm);
+    color: var(--c-text);
+  }
+
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--c-text-muted);
+    font-family: var(--font-mono);
+    flex-shrink: 0;
+    margin-left: var(--space-md);
+  }
+
+  .view-all {
+    display: inline-block;
+    margin-top: var(--space-md);
+    font-size: 0.875rem;
+  }
+</style>

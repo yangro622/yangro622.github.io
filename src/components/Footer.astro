@@ -1,0 +1,43 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer-inner">
+    <span class="copyright">&copy; {year} Robert Yang</span>
+    <div class="footer-links">
+      <a href="https://github.com/yangro622" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--c-border);
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--c-text-muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: var(--space-md);
+  }
+
+  .footer-links a {
+    color: var(--c-text-muted);
+  }
+
+  .footer-links a:hover {
+    color: var(--c-text);
+  }
+</style>
