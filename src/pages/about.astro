@@ -1,0 +1,128 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="About" description="About Robert Yang — software engineer, math PhD, South Bay.">
+  <h1>About</h1>
+
+  <section class="bio">
+    <p>
+      I'm Robert Yang (杨天一) — a software engineer at Meta, based in the South Bay with my wife
+      and two young kids.
+    </p>
+    <p>
+      My path to software engineering is a bit unusual: I came up through competitive mathematics,
+      spent six years getting a PhD in Finance at Carnegie Mellon, worked as a researcher at a
+      fintech company, and eventually landed here. The common thread is a preference for hard
+      problems with quantifiable answers.
+    </p>
+    <p>
+      At Meta, I work on online experimentation — specifically the infrastructure that decides
+      whether an ads experiment produced valid, trustworthy results. It's a domain where statistics,
+      data pipelines, and product judgment collide, which suits me.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Background</h2>
+    <p>
+      Before Meta, I was at Theorem Partners building ML infrastructure for loan evaluation —
+      credit modeling, feature engineering, and real-time capital deployment APIs. Before that,
+      my PhD research at CMU Tepper focused on how persuasive marketing language affects fee
+      premiums in financial products, using Unit Investment Trusts as a natural control.
+    </p>
+    <p>
+      I grew up doing competitive math — USAMO qualifier in high school, Putnam top ~150
+      nationally in college. That foundation tends to show up in how I work: I reach for
+      first principles and quantitative framing even when the problem looks qualitative on
+      the surface.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Education</h2>
+    <ul class="edu-list">
+      <li>
+        <span class="edu-degree">PhD, Finance — Minor in Machine Learning</span>
+        <span class="edu-school">Carnegie Mellon University, Tepper School of Business, 2014–2020</span>
+      </li>
+      <li>
+        <span class="edu-degree">BS Mathematics, BA Economics — Minor in Computer Science</span>
+        <span class="edu-school">Brigham Young University, 2010–2014</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Personal</h2>
+    <p>
+      I live in the South Bay with my wife of 13+ years and our two kids. Outside of work I'm
+      into climbing, basketball, and functional programming. I'm a native Mandarin speaker.
+    </p>
+  </section>
+
+  <section class="section links">
+    <a href="https://www.linkedin.com/in/tianyi-robert-yang-36366235" target="_blank" rel="noopener">LinkedIn &rarr;</a>
+    <a href="https://github.com/yangro622" target="_blank" rel="noopener">GitHub &rarr;</a>
+    <a href="mailto:tianyi.robert.yang@gmail.com">Email &rarr;</a>
+  </section>
+</Base>
+
+<style>
+  h1 {
+    margin-bottom: var(--space-xl);
+  }
+
+  .bio p,
+  .section p {
+    color: var(--c-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .section {
+    margin-top: var(--space-xl);
+  }
+
+  .section h2 {
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--c-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .edu-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .edu-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .edu-degree {
+    color: var(--c-text);
+    font-size: 0.95rem;
+  }
+
+  .edu-school {
+    color: var(--c-text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+  }
+
+  .links {
+    display: flex;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .links a {
+    font-size: 0.875rem;
+  }
+</style>
